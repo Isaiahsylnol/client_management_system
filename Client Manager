@@ -1,0 +1,61 @@
+from client import Client
+
+class ClientManager:
+
+    clientList = list() # Contains a list for storing clients
+    def __init__(self, id, max):
+        self.id = id
+        self.size = 0
+        self.max = max
+
+    def createClient(self, fname, lname, phone, email, address):
+        if (self.size < self.max): # Only append to list if elements < max size
+            self.fname = fname
+            self.lname = lname
+            self.phone = phone
+            self.email = email
+            self.address = address
+            client = Client(fname, lname, phone, email, address)
+            self.clientList.append(client)
+            self.size += 1
+
+    def addtoList(self, Student):
+        if(self.size < self.max): # Only append to list if elements < max size
+            self.clientList.append(Student)
+            self.size += 1
+        else:
+            print("ERROR - MAX CAPACITY")
+
+    def getClientCount(self):
+        return '\nClients: ' + (str(self.size))
+
+    # Nested loop for alphabetically
+    # sorting client output by first name
+    def printClientList(self):
+        if(self.size > 0):
+            for i in range(self.size):
+                for j in range(i+1, self.size):
+                    if(self.clientList[i].fname > self.clientList[j].fname):
+                        tmp = self.clientList[i]
+                        self.clientList[i] = self.clientList[j]
+                        self.clientList[j] = tmp
+        for p in range(self.size):
+            print(self.clientList[p].getName())
+
+admin = ClientManager(443, 6)
+admin.addtoList(Client("Michael", "Barley", "342-424-8522", "barley@gmai.com", "44 Dale View blvd"))
+admin.addtoList(Client("Asher", "Well", "342-424-5522", "well@gmai.com", "14 Dale View blvd"))
+admin.addtoList(Client("Blake", "Duffy", "823-490-2492", "duffy@gmai.com", "32 Duffrin Street"))
+admin.addtoList(Client("Sheldon", "Merl", "141-752-1175", "merl@gmai.com", "443 Leslie Avenue"))
+admin.addtoList(Client("Liam", "Hunter", "141-677-4424", "liam@gmai.com", "21 Frot Avenue"))
+
+print()
+
+print(admin.getClientCount())
+admin.printClientList()
+
+admin.createClient("isaiah", "sylvester", "434-433-5443", "sylv@gmail.com", "65 James Avenue")
+print(admin.getClientCount())
+admin.addtoList(Client("max", "capacity", "141-677-4424", "error@gmai.com", "404 East Avenue"))
+admin.addtoList(Client("wont", "store", "141-677-4424", "error@gmai.com", "404 West Avenue"))
+admin.printClientList()
