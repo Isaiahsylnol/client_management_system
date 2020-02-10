@@ -1,0 +1,14 @@
+
+class Client:
+    def __init__(self, fname, lname, phone, email, address):
+        self.fname = fname
+        self.lname = lname
+        self.phone = phone
+        self.email = email
+        self.address = address
+      
+    def getName(self):
+        return '{} {}'.format(self.fname, self.lname)
+
+    def getAddress(self):
+        return self.address
